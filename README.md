@@ -2,11 +2,11 @@
 
 ## Student Information
 
-### Student Name  : Name here
+### Student Name  : Rajesh Panta
 
-### Student ID    : ID here
+### Student ID    : 920636337
 
-### Student Email : Email here
+### Student Email : rpanta@sfsu.edu
 
 ## Requirements
 
