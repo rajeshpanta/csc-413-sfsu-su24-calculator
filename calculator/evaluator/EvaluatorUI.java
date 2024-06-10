@@ -10,6 +10,7 @@ public class EvaluatorUI extends JFrame implements ActionListener {
 
      private JTextField expressionTextField = new JTextField();
      private JPanel buttonPanel = new JPanel();
+    private Evaluator evaluator = new Evaluator();
 
      // total of 20 buttons on the calculator,
      // numbered from left to right, top to bottom
@@ -66,7 +67,30 @@ public class EvaluatorUI extends JFrame implements ActionListener {
       *                          button is pressed.
       */
      public void actionPerformed(ActionEvent actionEventObject) {
+         String command = actionEventObject.getActionCommand();
 
-
+         if (command.equals("=")) {
+             try {
+                 // Use the evaluator to calculate the expression entered and update the text field with the result
+                 int result = evaluator.evaluateExpression(expressionTextField.getText());
+                 expressionTextField.setText(String.valueOf(result));
+             } catch (InvalidTokenException e) {
+                 // Show error message if invalid tokens are found
+                 expressionTextField.setText("Error: " + e.getMessage());
+             }
+         } else if (command.equals("C")) {
+             // Clear the entire expression
+             expressionTextField.setText("");
+         } else if (command.equals("CE")) {
+             // Clear the last entry up to the last operator
+             String text = expressionTextField.getText();
+             if (!text.isEmpty()) {
+                 text = text.substring(0, text.length() - 1);
+                 expressionTextField.setText(text);
+             }
+         } else {
+             // Append the command (number or operator) to the end of the text in the text field
+             expressionTextField.setText(expressionTextField.getText() + command);
+         }
      }
- }
+}
